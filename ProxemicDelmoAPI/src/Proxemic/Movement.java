@@ -42,8 +42,7 @@ public class Movement {
 
 
 	/**
-	 * test
-	 * The method returns true if the azimuth angle of an interaction object EI and EG is within a range of reference
+	 *  The method returns true if the azimuth angle of an interaction object EI and EG is within a range of reference
 	 * @return boolean 
 	 */
 	public boolean isAzimuthInRange() {
