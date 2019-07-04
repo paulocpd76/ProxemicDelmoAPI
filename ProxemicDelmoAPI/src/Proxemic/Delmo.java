@@ -7,7 +7,6 @@ import java.util.ArrayList;
  *  @author pperez003
  *
  */
-
 public class Delmo {
 	private ProxZone proxZone;
 	private String zoneEg;
