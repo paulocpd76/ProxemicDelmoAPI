@@ -13,7 +13,8 @@ public class Location {
 	 * @param location  coordinates of the entity on the display
 	 */
 	public void setRelativeLocationScreen (float location) {
-		this.locationScreen="location";
+		if(location>=300) this.locationScreen="topLeft";
+		this.locationScreen="topRight";
 	}
 	/**
 	 * The method returns the relative position of an entity.
