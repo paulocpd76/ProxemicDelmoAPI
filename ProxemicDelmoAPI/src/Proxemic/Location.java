@@ -13,6 +13,7 @@ public class Location {
 	 * @param location  coordinates of the entity on the display
 	 */
 	public void setRelativeLocationScreen (float location) {
+		
 		if(location>=300) this.locationScreen="topLeft";
 		this.locationScreen="topRight";
 	}
@@ -21,6 +22,6 @@ public class Location {
 	 * @return
 	 */
 	public String getRelativeLocationOnScree() {
-		return "topLeft";
+		return this.locationScreen;
 	}
 }

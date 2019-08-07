@@ -28,6 +28,13 @@ public class Entity {
 	public void setRelOfDis(Distance distance) {
 		this.distance = distance;
 	}
+	public void setRelOfDisMov(Movement movement) {
+		
+		this.movement=movement;
+	}
+	public Movement getRelOfDisMov() {
+		return movement;
+	}
 
 	
 
