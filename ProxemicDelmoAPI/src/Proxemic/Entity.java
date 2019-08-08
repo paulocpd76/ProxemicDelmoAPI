@@ -35,7 +35,13 @@ public class Entity {
 	public Movement getRelOfDisMov() {
 		return movement;
 	}
-
+	
+	public Location getRelOfLoc() {
+		return location;
+	}
+	public void  setRelOfLocation(Location location) {
+		this.location=location;
+	}
 	
 
 	/*
