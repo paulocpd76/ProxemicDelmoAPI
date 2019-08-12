@@ -24,17 +24,17 @@ public Movement() {
  * @param low
  * @param azimuthZ
  */
-public void setAzimuthWithRange(String E,float hight,float low,float azimuthZ) {
+public void setAzimuthWithRange(float hight,float low,float azimuthZ) {
 	if(low <azimuthZ && azimuthZ <hight) this.rangAzimuth=true;
 	else this.rangAzimuth=false;
 	
 }
 
-public void setRollWithRange(String E,float hight,float low, float rollY) {
+public void setRollWithRange(float hight,float low, float rollY) {
 	if(low <rollY && rollY <hight) this.rangRoll=true;
 	else this.rangRoll=false;
 }
-public void setPitchWithRange(String E,float hight,float low, float pitchX) {
+public void setPitchWithRange(float hight,float low, float pitchX) {
 	if(low <pitchX && pitchX <hight) this.rangPith=true;
 	else this.rangPith=false;
 

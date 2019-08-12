@@ -95,6 +95,66 @@ public class Dilmo {
 	 return null;
  }
  
+ public void setProxemicDIM (String entity,double distance,String axe,float max,float min,float value ) {
+		if (this.proxZone.getEntities().size()==0) {this.setDIM(entity, distance, axe, max, min, value);}
+		else {
+				for (int i=0; i<this.proxZone.getEntities().size();i++ ) {
+					if (this.proxZone.getEntities().get(i).getIdenEntityName()==entity) {
+						 switch (axe) {
+						 case "azimuth":this.proxZone.getEntities().get(i).getRelOfDisMov().setAzimuthWithRange(max, min, value);break;
+						 case "pitch":this.proxZone.getEntities().get(i).getRelOfDisMov().setPitchWithRange(max,min,value);break;
+						 case "roll":this.proxZone.getEntities().get(i).getRelOfDisMov().setRollWithRange(max,min,value);break;
+						default:break;
+					 }
+						this.proxZone.getEntities().get(i).getRelOfDis().setDistance(distance);					
+						//System.out.println(this.proxZone.getEntities().get(i).getIdenEntityName());
+					}
+					else {
+						//this.setDIM(entity, distance, axe, max, min, value); 
+						
+						 Entity Ed0= new Entity(entity);
+						 Distance d= new Distance();
+						 Movement mo = new Movement();
+						 Ed0.setRelOfDis(d);
+						 Ed0.distance.setDistance(distance);
+						 Ed0.setRelOfDisMov(mo);
+						 //Ed0.location.setRelativeLocationScreen(location);
+						  switch (axe) {
+							 case "azimuth":Ed0.movement.setAzimuthWithRange(max,min, value);break;
+							 case "pitch":Ed0.movement.setPitchWithRange(max,min, value);break;
+							 case "roll":Ed0.movement.setRollWithRange(max,min, value);break;
+							default:break;
+						 }
+						 
+						 this.proxZone.getEntities().add(Ed0);
+						 
+					}
+					
+				}
+		} 
+ }
+ public String getProxemicDIM(String entity,String axe) {
+	 for (int i=0; i<this.proxZone.getEntities().size(); i++) 
+	 {
+	  if(entity==this.proxZone.getEntities().get(i).getIdenEntityName()) {
+	  	  double ds=this.proxZone.getEntities().get(i).getRelOfDis().getDistance();
+	  	  //String loc=			this.proxZone.getEntities().get(i).getRelOfLoc().getRelativeLocationOnScree();
+	  	Boolean moAxi= false;
+	  	  switch (axe) {
+		 case "azimuth":moAxi=this.proxZone.getEntities().get(i).getRelOfDisMov().isAzimuthInRange();break;
+		 case "pitch":moAxi=this.proxZone.getEntities().get(i).getRelOfDisMov().isPitchInRange();break;
+		 case "roll":moAxi=this.proxZone.getEntities().get(i).getRelOfDisMov().isRollInRange();break;
+		default:break;
+	 }
+	  	  String valueAx;
+	  	  if(moAxi==true) valueAx="inTheRange ";else valueAx="outOfRange.";
+	  	  //System.out.println(this.proxZone.setDistanceofEntity(ds));
+	  	  return this.proxZone.setDistanceofEntity(ds)+"-"+ valueAx;
+	 }
+	 }
+	 
+	 return null;
+ }
  public void setDEM(String entity, double distance,float hight,float low,float azimuthZ) {
 	 
 	 
@@ -105,7 +165,7 @@ public class Dilmo {
 	 Ed0.setRelOfDis(d);
 	 Ed0.setRelOfDisMov(m);
 	 Ed0.distance.setDistance(distance);
-	 Ed0.movement.setAzimuthWithRange(entity, hight, low, azimuthZ);
+	 Ed0.movement.setAzimuthWithRange(hight, low, azimuthZ);
 	 this.proxZone.setEntities(Ed0);
 	 	 
  }
@@ -153,15 +213,16 @@ public class Dilmo {
  
  
  private void setIniEnty(String entity, double distance) {
-	 	 if(this.proxZone.getEntities().size()==0) { 
+	 	 
 		 Entity Ed0= new Entity(entity);
 		 Distance d= new Distance();
 		 Ed0.setRelOfDis(d);
 		 Ed0.distance.setDistance(distance);
 		 this.proxZone.setEntities(Ed0);
-	 	 }
+	 	 
 	 }
-  
+
+
  private void setIniEntyDILMO(String entity,double distance,float location) {
 	 if(this.proxZone.getEntities().size()==0) { 
 		 Entity Ed0= new Entity(entity);
@@ -173,28 +234,61 @@ public class Dilmo {
 		 Ed0.location.setRelativeLocationScreen(location);
 		 this.proxZone.setEntities(Ed0);
  	 }
- }
-
- 
- 
+   }
+ private void setDIM(String entity,double distance,String  axe,float max,float min,float value) {
+	 if(this.proxZone.getEntities().size()==0) { 
+		 Entity Ed0= new Entity(entity);
+		 Distance d= new Distance();
+		 Movement mo= new Movement();
+		 Ed0.setRelOfDis(d);
+		 Ed0.distance.setDistance(distance);
+		 Ed0.setRelOfDisMov(mo);
+		 switch (axe) {
+			 case "azimuth":Ed0.movement.setAzimuthWithRange(max,min,value);break;
+			 case "pitch":Ed0.movement.setPitchWithRange(max,min,value);break;
+			 case "roll":Ed0.movement.setRollWithRange(max,min,value);break;
+			default:break;
+		 }
+		this.proxZone.setEntities(Ed0);
+ 	 }
+   }
  public static void main(String[] args) {
 	 
-	 	
+	 	//**Proxemic zone**
 		ProxZone p = new ProxZone(0.5,1,4,50);
-		//**** test DI************
 		Dilmo dilmo= new Dilmo(p);
+//**** test DI************
+		
 		dilmo.setProxemicDistIdenEntity("Paulo", 7);
-	 // dilmo.setProxemicDistIdenEntity("Paulo", 0.2);
-	 // dilmo.setProxemicDistIdenEntity("Iva", 5);
+		 dilmo.setProxemicDistIdenEntity("Paulo", 8);
+	  //  dilmo.setProxemicDistIdenEntity("Iva", 2);
 	   //dilmo.setProxemicDistIdenEntity("Rica", 0.2);
-	   dilmo.setProxemicDistIdenEntity("Paulo", 0.2);
+	 //dilmo.setProxemicDistIdenEntity("Paulo", 4);
 	  System.out.println(dilmo.getProxemicZoneIdenEntity("Paulo"));
-		//**** test DIL************
-	      dilmo.setProxemicDIL("Antonio", 0.2, 500);
+	 // System.out.println(dilmo.getProxemicZoneIdenEntity("Iva"));
+//**** test DIL************
+		
+	      dilmo.setProxemicDIL("Antonio", 3, 500);
 	      System.out.println(dilmo.getProxemicDIL("Antonio"));
-	      dilmo.setProxemicDIL("Carlos", 2,20);
+	      /* dilmo.setProxemicDIL("Carlos", 2,20);
 	      System.out.println(dilmo.getProxemicDIL("Carlos"));
-	    //***dem
+	      String s = dilmo.getProxemicDIL("Carlos");
+	      String[] data = s.split("-", 2);
+	      System.out.println("Carlos = "+data[0] +" ,Location = "+data[1]); 
+	     */
+//**** test DIM************	      
+	 dilmo.setProxemicDIM("Fanny", 2, "azimuth", 8, 2, 5);
+	 System.out.println(dilmo.getProxemicDIM("Fanny","azimuth"));    
+	      
+//**** test DIO***** aqui
+	// 	Orientation orientation = new Orientation();
+	// 	ArrayList<Object> obj = new ArrayList<Object>();
+	 //	ArrayList<Object> obj = new ArrayList<Object>();
+	 //	orientation.setDetectedFaces(obj);
+	// 	orientation.getFaceObjec();
+	 	//orientation.se
+	      
+	      //***dem
 	  //System.out.println( dilmo.getProxemicZoneIdenEntity("Iva"));
 	  //System.out.println( dilmo.getProxemicZoneIdenEntity("Rica"));
 	 // dilmo.setDEM("Ethan",3 , 4, 1, 3);
