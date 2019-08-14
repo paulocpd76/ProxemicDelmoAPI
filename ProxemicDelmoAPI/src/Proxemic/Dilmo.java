@@ -253,14 +253,14 @@ public class Dilmo {
  	 }
    }
  public static void main(String[] args) {
-	 
+	 	
 	 	//**Proxemic zone**
 		ProxZone p = new ProxZone(0.5,1,4,50);
 		Dilmo dilmo= new Dilmo(p);
 //**** test DI************
 		
 		dilmo.setProxemicDistIdenEntity("Paulo", 7);
-		 dilmo.setProxemicDistIdenEntity("Paulo", 8);
+		 dilmo.setProxemicDistIdenEntity("Paulo", 0.2);
 	  //  dilmo.setProxemicDistIdenEntity("Iva", 2);
 	   //dilmo.setProxemicDistIdenEntity("Rica", 0.2);
 	 //dilmo.setProxemicDistIdenEntity("Paulo", 4);
@@ -277,18 +277,20 @@ public class Dilmo {
 	      System.out.println("Carlos = "+data[0] +" ,Location = "+data[1]); 
 	     */
 //**** test DIM************	      
-	 dilmo.setProxemicDIM("Fanny", 2, "azimuth", 8, 2, 5);
+	 dilmo.setProxemicDIM("Fanny", 8, "azimuth", 8, 2, 9);
 	 System.out.println(dilmo.getProxemicDIM("Fanny","azimuth"));    
 	      
 //**** test DIO***** aqui
-	// 	Orientation orientation = new Orientation();
-	// 	ArrayList<Object> obj = new ArrayList<Object>();
-	 //	ArrayList<Object> obj = new ArrayList<Object>();
-	 //	orientation.setDetectedFaces(obj);
-	// 	orientation.getFaceObjec();
-	 	//orientation.se
-	      
-	      //***dem
+Orientation orientation = new Orientation();
+
+	String myTwoDimensionalStringArray[][] = new String[2][2];
+	myTwoDimensionalStringArray[0][0] = "id0";
+	myTwoDimensionalStringArray[0][1] = "100";
+	myTwoDimensionalStringArray[1][0] = "id1";
+	myTwoDimensionalStringArray[1][1] = "300";
+	orientation.setDetectedFaces(myTwoDimensionalStringArray,p);
+    orientation.isFaceDetected("id0","socialZone");
+     //***dem
 	  //System.out.println( dilmo.getProxemicZoneIdenEntity("Iva"));
 	  //System.out.println( dilmo.getProxemicZoneIdenEntity("Rica"));
 	 // dilmo.setDEM("Ethan",3 , 4, 1, 3);
